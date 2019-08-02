@@ -1,0 +1,1461 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{investigate-a-dataset-template}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Project: Investigate a Dataset (TMDb Movie Data
+Analysis)}\label{project-investigate-a-dataset-tmdb-movie-data-analysis}
+
+\subsection{Table of Contents}\label{table-of-contents}
+
+Introduction
+
+Data Wrangling
+
+Exploratory Data Analysis
+
+Conclusions
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{Table of Contents}\label{table-of-contents}
+
+I. Introduction
+
+II. Data Wrangling
+
+III. Exploratory Data Analysis
+
+IV. Conclusions
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+ \#\# I. INTRODUCTION In this project we will analyze the TMDb movie
+dataset.This data set contains information about 10,000 movies collected
+from The Movie Database (TMDb), including user ratings and revenue.
+
+\paragraph{Dataset: The Movie Database
+(TMDb)}\label{dataset-the-movie-database-tmdb}
+
+(cleaned from original data on
+\href{https://www.google.com/url?q=https://www.kaggle.com/tmdb/tmdb-movie-metadata\&sa=D\&ust=1532959635693000}{Kaggle})
+The dataset selected for analysis is from The Movie Database (TMDb) and
+contains approx. 10,000 movies. \textgreater{}To view the CSV file,
+click in the following link:
+\href{https://www.google.com/url?q=https://d17h27t6h515a5.cloudfront.net/topher/2017/October/59dd1c4c_tmdb-movies/tmdb-movies.csv\&sa=D\&ust=1532959635693000}{TMDb
+Movie Data}
+
+The TMDb includes the following 21 columns:
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+\begin{minipage}[b]{0.28\columnwidth}\raggedright\strut
+Column\strut
+\end{minipage} & \begin{minipage}[b]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.28\columnwidth}\raggedright\strut
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+budget\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+The budget of the movie in dollars.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+budget\_adj\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+The budget of the movie in terms of 2010 dollars.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+cast\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+A list of actors, seperated by pipes, associated with the movie.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+director\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+A list of directors, seperated by pipes, associated with the
+movie.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+genres\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+A list of genres, seperated by pipes, associated with the movie.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+homepage\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+The Official Homepage of the move.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+id\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+The ID of the move.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+imdb\_id\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+The IMDB ID of the movie.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+keywords\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+A list of words, seperated by pipes, associated with the movie.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+original\_title\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+The original title of the movie.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+overview\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+A brief blurb of the movie.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+popularity\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+The Popularity Score assigned by TMDB.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+production\_companies\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+A list of production companies, seperated by pipes, involved with the
+making of the movie.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+release\_date\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+Theatrical Release Date of the movie.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+release\_year\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+Theatrical Release Year of the movie.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+revenue\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+The total revenue of the movie in dollars.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+runtime\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+The runtime of the movie in minutes.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+tagline\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+The tagline of the movie.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+vote\_average\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+The average rating of the movie.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+vote\_count\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright\strut
+The number of votes by users, as counted by TMDB.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\paragraph{What questions can we ask?}\label{what-questions-can-we-ask}
+
+\begin{quote}
+After the initial EDA, I have determined to use the following questions
+to explore in this report: - 1: Which genre movies are profitable? - 2:
+Do movies with higher vote count have high popularity? - 3: Which is the
+most common movie Genre and Which Genres genrate highest revenue? - 4:
+How has the popularity changed over the years? - 5: Which production
+companies made the maximum movies in past 60 years, and which production
+companies have high budget? - 6: Which production companies with
+significant number of movies recieve the highest avergae vote? - 7:
+Which cast has acted in most movies? Which cast movies are more likely
+to give profit? - 8: What are the average movie budget,average movie
+runtime and average movie revenue?
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} import statements for all of the packages }
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np} \PY{c+c1}{\PYZsh{} package for scientific computing}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd} \PY{c+c1}{\PYZsh{} data analysis library}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt} \PY{c+c1}{\PYZsh{} collection of command style functions that make matplotlib work like MATLAB}
+        \PY{k+kn}{import} \PY{n+nn}{csv}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns} \PY{c+c1}{\PYZsh{} data visualization library based on matplotlib. }
+\end{Verbatim}
+
+
+     \#\# Data Wrangling
+
+\subsubsection{General Properties}\label{general-properties}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}Loading the data}
+        \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tmdb\PYZhy{}movies.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}To see how are data looks like}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}        id    imdb\_id  popularity     budget     revenue  \textbackslash{}
+        0  135397  tt0369610   32.985763  150000000  1513528810   
+        1   76341  tt1392190   28.419936  150000000   378436354   
+        2  262500  tt2908446   13.112507  110000000   295238201   
+        3  140607  tt2488496   11.173104  200000000  2068178225   
+        4  168259  tt2820852    9.335014  190000000  1506249360   
+        
+                         original\_title  \textbackslash{}
+        0                Jurassic World   
+        1            Mad Max: Fury Road   
+        2                     Insurgent   
+        3  Star Wars: The Force Awakens   
+        4                     Furious 7   
+        
+                                                        cast  \textbackslash{}
+        0  Chris Pratt|Bryce Dallas Howard|Irrfan Khan|Vi{\ldots}   
+        1  Tom Hardy|Charlize Theron|Hugh Keays-Byrne|Nic{\ldots}   
+        2  Shailene Woodley|Theo James|Kate Winslet|Ansel{\ldots}   
+        3  Harrison Ford|Mark Hamill|Carrie Fisher|Adam D{\ldots}   
+        4  Vin Diesel|Paul Walker|Jason Statham|Michelle {\ldots}   
+        
+                                                    homepage          director  \textbackslash{}
+        0                      http://www.jurassicworld.com/   Colin Trevorrow   
+        1                        http://www.madmaxmovie.com/     George Miller   
+        2     http://www.thedivergentseries.movie/\#insurgent  Robert Schwentke   
+        3  http://www.starwars.com/films/star-wars-episod{\ldots}       J.J. Abrams   
+        4                           http://www.furious7.com/         James Wan   
+        
+                                 tagline      {\ldots}       \textbackslash{}
+        0              The park is open.      {\ldots}        
+        1             What a Lovely Day.      {\ldots}        
+        2     One Choice Can Destroy You      {\ldots}        
+        3  Every generation has a story.      {\ldots}        
+        4            Vengeance Hits Home      {\ldots}        
+        
+                                                    overview runtime  \textbackslash{}
+        0  Twenty-two years after the events of Jurassic {\ldots}     124   
+        1  An apocalyptic story set in the furthest reach{\ldots}     120   
+        2  Beatrice Prior must confront her inner demons {\ldots}     119   
+        3  Thirty years after defeating the Galactic Empi{\ldots}     136   
+        4  Deckard Shaw seeks revenge against Dominic Tor{\ldots}     137   
+        
+                                              genres  \textbackslash{}
+        0  Action|Adventure|Science Fiction|Thriller   
+        1  Action|Adventure|Science Fiction|Thriller   
+        2         Adventure|Science Fiction|Thriller   
+        3   Action|Adventure|Science Fiction|Fantasy   
+        4                      Action|Crime|Thriller   
+        
+                                        production\_companies release\_date vote\_count  \textbackslash{}
+        0  Universal Studios|Amblin Entertainment|Legenda{\ldots}       6/9/15       5562   
+        1  Village Roadshow Pictures|Kennedy Miller Produ{\ldots}      5/13/15       6185   
+        2  Summit Entertainment|Mandeville Films|Red Wago{\ldots}      3/18/15       2480   
+        3          Lucasfilm|Truenorth Productions|Bad Robot     12/15/15       5292   
+        4  Universal Pictures|Original Film|Media Rights {\ldots}       4/1/15       2947   
+        
+           vote\_average  release\_year    budget\_adj   revenue\_adj  
+        0           6.5          2015  1.379999e+08  1.392446e+09  
+        1           7.1          2015  1.379999e+08  3.481613e+08  
+        2           6.3          2015  1.012000e+08  2.716190e+08  
+        3           7.5          2015  1.839999e+08  1.902723e+09  
+        4           7.3          2015  1.747999e+08  1.385749e+09  
+        
+        [5 rows x 21 columns]
+\end{Verbatim}
+            
+    \paragraph{Better understanding of data - Using the shape,describe() and
+info
+function}\label{better-understanding-of-data---using-the-shapedescribe-and-info-function}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}shape of the dataframe}
+        \PY{n}{df}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} (10866, 21)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}descriptionn of data}
+        \PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}                   id    popularity        budget       revenue       runtime  \textbackslash{}
+        count   10866.000000  10866.000000  1.086600e+04  1.086600e+04  10866.000000   
+        mean    66064.177434      0.646441  1.462570e+07  3.982332e+07    102.070863   
+        std     92130.136561      1.000185  3.091321e+07  1.170035e+08     31.381405   
+        min         5.000000      0.000065  0.000000e+00  0.000000e+00      0.000000   
+        25\%     10596.250000      0.207583  0.000000e+00  0.000000e+00     90.000000   
+        50\%     20669.000000      0.383856  0.000000e+00  0.000000e+00     99.000000   
+        75\%     75610.000000      0.713817  1.500000e+07  2.400000e+07    111.000000   
+        max    417859.000000     32.985763  4.250000e+08  2.781506e+09    900.000000   
+        
+                 vote\_count  vote\_average  release\_year    budget\_adj   revenue\_adj  
+        count  10866.000000  10866.000000  10866.000000  1.086600e+04  1.086600e+04  
+        mean     217.389748      5.974922   2001.322658  1.755104e+07  5.136436e+07  
+        std      575.619058      0.935142     12.812941  3.430616e+07  1.446325e+08  
+        min       10.000000      1.500000   1960.000000  0.000000e+00  0.000000e+00  
+        25\%       17.000000      5.400000   1995.000000  0.000000e+00  0.000000e+00  
+        50\%       38.000000      6.000000   2006.000000  0.000000e+00  0.000000e+00  
+        75\%      145.750000      6.600000   2011.000000  2.085325e+07  3.369710e+07  
+        max     9767.000000      9.200000   2015.000000  4.250000e+08  2.827124e+09  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 10866 entries, 0 to 10865
+Data columns (total 21 columns):
+id                      10866 non-null int64
+imdb\_id                 10856 non-null object
+popularity              10866 non-null float64
+budget                  10866 non-null int64
+revenue                 10866 non-null int64
+original\_title          10866 non-null object
+cast                    10790 non-null object
+homepage                2936 non-null object
+director                10822 non-null object
+tagline                 8042 non-null object
+keywords                9373 non-null object
+overview                10862 non-null object
+runtime                 10866 non-null int64
+genres                  10843 non-null object
+production\_companies    9836 non-null object
+release\_date            10866 non-null object
+vote\_count              10866 non-null int64
+vote\_average            10866 non-null float64
+release\_year            10866 non-null int64
+budget\_adj              10866 non-null float64
+revenue\_adj             10866 non-null float64
+dtypes: float64(4), int64(6), object(11)
+memory usage: 1.7+ MB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{df\PYZus{}new} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{Dropping columns which will not be used for
+analysis}\label{dropping-columns-which-will-not-be-used-for-analysis}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{overview}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tagline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{imdb\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{release\PYZus{}date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{revenue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{homepage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{keywords}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{original\PYZus{}title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}           id  popularity                                               cast  \textbackslash{}
+        10861     21    0.080598  Michael Hynson|Robert August|Lord 'Tally Ho' B{\ldots}   
+        10862  20379    0.065543  James Garner|Eva Marie Saint|Yves Montand|Tosh{\ldots}   
+        10863  39768    0.065141  Innokentiy Smoktunovskiy|Oleg Efremov|Georgi Z{\ldots}   
+        10864  21449    0.064317  Tatsuya Mihashi|Akiko Wakabayashi|Mie Hama|Joh{\ldots}   
+        10865  22293    0.035919  Harold P. Warren|Tom Neyman|John Reynolds|Dian{\ldots}   
+        
+                         director  runtime                  genres  \textbackslash{}
+        10861         Bruce Brown       95             Documentary   
+        10862  John Frankenheimer      176  Action|Adventure|Drama   
+        10863      Eldar Ryazanov       94          Mystery|Comedy   
+        10864         Woody Allen       80           Action|Comedy   
+        10865    Harold P. Warren       74                  Horror   
+        
+                                            production\_companies  vote\_count  \textbackslash{}
+        10861                                  Bruce Brown Films          11   
+        10862  Cherokee Productions|Joel Productions|Douglas {\ldots}          20   
+        10863                                            Mosfilm          11   
+        10864                            Benedict Pictures Corp.          22   
+        10865                                          Norm-Iris          15   
+        
+               vote\_average  release\_year     budget\_adj  revenue\_adj  
+        10861           7.4          1966       0.000000          0.0  
+        10862           5.7          1966       0.000000          0.0  
+        10863           6.5          1966       0.000000          0.0  
+        10864           5.4          1966       0.000000          0.0  
+        10865           1.5          1966  127642.279154          0.0  
+\end{Verbatim}
+            
+    \paragraph{In the above data we can observe budget and revenue column
+have value =
+0.}\label{in-the-above-data-we-can-observe-budget-and-revenue-column-have-value-0.}
+
+\paragraph{These values need to be imputed for better
+analysis}\label{these-values-need-to-be-imputed-for-better-analysis}
+
+    \paragraph{- Finding missing values}\label{finding-missing-values}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{} To see the number of rows with null values in each column}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} id                         0
+        popularity                 0
+        cast                      76
+        director                  44
+        runtime                    0
+        genres                    23
+        production\_companies    1030
+        vote\_count                 0
+        vote\_average               0
+        release\_year               0
+        budget\_adj                 0
+        revenue\_adj                0
+        dtype: int64
+\end{Verbatim}
+            
+    \subsubsection{Data Cleaning :}\label{data-cleaning}
+
+\paragraph{Deleting duplicate rows}\label{deleting-duplicate-rows}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{duplicated}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}Checking for duplicate rows}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 1
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{df\PYZus{}new}\PY{o}{=}\PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}dropping the duplicate rows}
+\end{Verbatim}
+
+
+    \paragraph{Handling the missing
+values}\label{handling-the-missing-values}
+
+\begin{verbatim}
+<li>Replacing the zero values in budget_adj and revenue_adj column with mean of the column</li>
+<li>Dropping the rows with null values</li>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{cols}\PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{budget\PYZus{}adj}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{revenue\PYZus{}adj}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{c+c1}{\PYZsh{}filling the 0 values in budget and revenue column by mean of their columns respectively}
+         \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{cols}\PY{p}{:}
+             \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{NaN}\PY{p}{)}
+             \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{df\PYZus{}new}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{df\PYZus{}new} \PY{o}{=} \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}dropping rows with null values}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{rows\PYZus{}dropped} \PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{rows\PYZus{}dropped}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} 1094
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{}conforming that there are no null values}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} id                      0
+         popularity              0
+         cast                    0
+         director                0
+         runtime                 0
+         genres                  0
+         production\_companies    0
+         vote\_count              0
+         vote\_average            0
+         release\_year            0
+         budget\_adj              0
+         revenue\_adj             0
+         dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{}Creating a new column \PYZsq{}profit\PYZsq{} }
+         \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{revenue\PYZus{}adj}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{budget\PYZus{}adj}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} False
+\end{Verbatim}
+            
+    \subsubsection{Now the data is clean and can be used for
+analysis}\label{now-the-data-is-clean-and-can-be-used-for-analysis}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{df\PYZus{}split\PYZus{}genre} \PY{o}{=} \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}\PY{p}{;} \PY{c+c1}{\PYZsh{}Analysing the distribution of data through visuals}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the above analysis we can infer the following:
+
+Number of movies made have increased over the years
+
+\begin{verbatim}
+<li>Maximum movies have a vote_average between 5-7 </li>
+<li>Runtime of maximum movies is between 100-150 minutes </li>
+\end{verbatim}
+
+    Creating multiple rows for genre column with multiple entries \#\#\#\#
+This DataFrame will be used for genre specific problems.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{s} \PY{o}{=} \PY{n}{df\PYZus{}split\PYZus{}genre}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{genres}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{)}
+         \PY{n}{s}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{n}{s}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{droplevel}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{s}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{genre}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{s}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{df\PYZus{}split\PYZus{}genre} \PY{o}{=}\PY{n}{df\PYZus{}split\PYZus{}genre}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+         \PY{k}{del} \PY{n}{df\PYZus{}split\PYZus{}genre}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genres}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{df\PYZus{}split\PYZus{}genre}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} (24650, 13)
+\end{Verbatim}
+            
+     \#\# Exploratory Data Analysis
+
+\subsubsection{Research Question 1: Which genre movies are
+profitable?}\label{research-question-1-which-genre-movies-are-profitable}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{profit\PYZus{}by\PYZus{}genre} \PY{o}{=} \PY{n}{df\PYZus{}split\PYZus{}genre}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{profit\PYZus{}by\PYZus{}genre}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{level}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x} \PY{o}{/} \PY{n}{x}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} genre            profit
+         Action           False     0.183893
+                          True      0.816107
+         Adventure        False     0.159682
+                          True      0.840318
+         Animation        False     0.106969
+                          True      0.893031
+         Comedy           False     0.172444
+                          True      0.827556
+         Crime            False     0.205543
+                          True      0.794457
+         Documentary      False     0.170347
+                          True      0.829653
+         Drama            False     0.218607
+                          True      0.781393
+         Family           False     0.112329
+                          True      0.887671
+         Fantasy          False     0.161905
+                          True      0.838095
+         Foreign          False     0.175000
+                          True      0.825000
+         History          False     0.189542
+                          True      0.810458
+         Horror           False     0.132372
+                          True      0.867628
+         Music            False     0.227139
+                          True      0.772861
+         Mystery          False     0.223803
+                          True      0.776197
+         Romance          False     0.214013
+                          True      0.785987
+         Science Fiction  False     0.164613
+                          True      0.835387
+         TV Movie         True      1.000000
+         Thriller         False     0.190459
+                          True      0.809541
+         War              False     0.182171
+                          True      0.817829
+         Western          False     0.168750
+                          True      0.831250
+         Name: id, dtype: float64
+\end{Verbatim}
+            
+    \subsubsection{Answer 1: From the above observation it can be inferred
+that for all generes 75-80\% movies give profit except TV Movie where
+all 1051 movies gave
+profit.}\label{answer-1-from-the-above-observation-it-can-be-inferred-that-for-all-generes-75-80-movies-give-profit-except-tv-movie-where-all-1051-movies-gave-profit.}
+
+    \subsubsection{Research Question 2: Do movies with higher vote count
+have high
+popularity?}\label{research-question-2-do-movies-with-higher-vote-count-have-high-popularity}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vote\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{popularity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{}Scatter plot of vote\PYZus{}count and popularity}
+         
+         \PY{c+c1}{\PYZsh{}Adding Title}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vote\PYZus{}count vs Popularity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Setting the range of s\PYZhy{}axis}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Answer 2: From the scatter plot it is clear that more
+popular movies recieve higher number of
+votes}\label{answer-2-from-the-scatter-plot-it-is-clear-that-more-popular-movies-recieve-higher-number-of-votes}
+
+    \subsubsection{Research Question 3 : Which is the most common movie
+Genre and Which Genres genrate highest
+revenue?}\label{research-question-3-which-is-the-most-common-movie-genre-and-which-genres-genrate-highest-revenue}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{}Grouping the dataset by genre column and calculating the number of movies and revenue generated in each genre}
+         \PY{n}{genre\PYZus{}revenue\PYZus{}count} \PY{o}{=} \PY{n}{df\PYZus{}split\PYZus{}genre}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{revenue\PYZus{}adj}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+         
+         \PY{n}{genre\PYZus{}revenue\PYZus{}count}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Genre\PYZus{}Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Revenue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}   \PY{c+c1}{\PYZsh{}Adding column name}
+         
+         \PY{c+c1}{\PYZsh{}plotting genre vs number of movies}
+         \PY{n}{genre\PYZus{}revenue\PYZus{}count}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Genre\PYZus{}Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}adding labels}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Genres}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of movies in each genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Answer 3: The most common movie genre is Drama followed
+by Comedy and
+Thriller.}\label{answer-3-the-most-common-movie-genre-is-drama-followed-by-comedy-and-thriller.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{}plotting genre vs average revenue}
+         \PY{p}{(}\PY{n}{genre\PYZus{}revenue\PYZus{}count}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Revenue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Adding labels}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{75}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Genres}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Averge Revenue (*10\PYZca{}8)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Genre vs Average Revenue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Answer 3-1: From the above bar plot we can see that
+Adventure, Action, Animation, Fantasy and Science Fiction are some
+genres which genrate higher revenue on an average while Documentary and
+horror movies generate low
+revenue}\label{answer-3-1-from-the-above-bar-plot-we-can-see-that-adventure-action-animation-fantasy-and-science-fiction-are-some-genres-which-genrate-higher-revenue-on-an-average-while-documentary-and-horror-movies-generate-low-revenue}
+
+    \subsubsection{Research Question 4:How has the popularity changed over
+the
+years?}\label{research-question-4how-has-the-popularity-changed-over-the-years}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{popularity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}distribution of popularity}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7fdeccf082e8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{}Grouping the relaese year under the decade range}
+         \PY{n}{bins} \PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1960}\PY{p}{,}\PY{l+m+mi}{1970}\PY{p}{,}\PY{l+m+mi}{1980}\PY{p}{,}\PY{l+m+mi}{1990}\PY{p}{,}\PY{l+m+mi}{2000}\PY{p}{,}\PY{l+m+mi}{2015}\PY{p}{]}
+         \PY{n}{labels} \PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1960\PYZhy{}1970}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1970\PYZhy{}1980}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1980\PYZhy{}1990}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1990\PYZhy{}2000}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2000+}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}Creating a new column \PYZsq{}year\PYZsq{}}
+         \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{release\PYZus{}year}\PY{p}{,}\PY{n}{bins}\PY{o}{=}\PY{n}{bins}\PY{p}{,}\PY{n}{labels} \PY{o}{=}\PY{n}{labels}\PY{p}{,}\PY{n}{include\PYZus{}lowest}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Grouping the years to analyze the change in popularity over the years}
+         \PY{n}{popularity\PYZus{}by\PYZus{}year} \PY{o}{=} \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{popularity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{}Plotting popularity change over the years}
+         \PY{n}{popularity\PYZus{}by\PYZus{}year}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Adding labels}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Popularity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Over the years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Popularity over the years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{locations} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{locations}\PY{p}{,}\PY{n}{labels}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}Number of movies made in a decade}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} year
+         1960-1970     387
+         1970-1980     524
+         1980-1990    1048
+         1990-2000    1742
+         2000+        6071
+         Name: id, dtype: int64
+\end{Verbatim}
+            
+    \subsubsection{Answer 4: Popularity and the number of movies made every
+year have continuously increased over the
+years.}\label{answer-4-popularity-and-the-number-of-movies-made-every-year-have-continuously-increased-over-the-years.}
+
+    \subsubsection{Production Specific
+analysis}\label{production-specific-analysis}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{df\PYZus{}split\PYZus{}production} \PY{o}{=} \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    Creating multiple rows for production\_companies column with multiple
+entries \#\#\#\# This DataFrame will be used for production specific
+problems.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{t} \PY{o}{=} \PY{n}{df\PYZus{}split\PYZus{}production}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{production\PYZus{}companies}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{)}
+         \PY{n}{t}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{n}{t}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{droplevel}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{t}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{production}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{production}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{df\PYZus{}split\PYZus{}production} \PY{o}{=}\PY{n}{df\PYZus{}split\PYZus{}production}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+         \PY{k}{del} \PY{n}{df\PYZus{}split\PYZus{}production}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{production\PYZus{}companies}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{df\PYZus{}split\PYZus{}production}\PY{o}{.}\PY{n}{shape} \PY{c+c1}{\PYZsh{}Shape after splitting by production companies}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} (23143, 14)
+\end{Verbatim}
+            
+    \subsubsection{Research Question 5: Which production companies made the
+maximum movies in past 60 years, and which production companies have
+high
+budget?}\label{research-question-5-which-production-companies-made-the-maximum-movies-in-past-60-years-and-which-production-companies-have-high-budget}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{}Grouping the data by production to calculate number of movies made by a production,their averge budget,average revenue }
+         \PY{c+c1}{\PYZsh{}andpercentage of profitable movies }
+         \PY{n}{production\PYZus{}budget\PYZus{}count} \PY{o}{=} \PY{n}{df\PYZus{}split\PYZus{}production}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{production}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{budget\PYZus{}adj}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{revenue\PYZus{}adj}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Naming the columns}
+         \PY{n}{production\PYZus{}budget\PYZus{}count}\PY{o}{.}\PY{n}{columns} \PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{budget\PYZus{}mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{revenue\PYZus{}mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{percent\PYZus{}profit\PYZus{}movies}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}Sorting the values by number of movies per production}
+         \PY{n}{production\PYZus{}count\PYZus{}desc} \PY{o}{=} \PY{n}{production\PYZus{}budget\PYZus{}count}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Sorting the values by budget}
+         \PY{n}{production\PYZus{}budget\PYZus{}desc} \PY{o}{=} \PY{n}{production\PYZus{}budget\PYZus{}count}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{budget\PYZus{}mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         
+         \PY{n}{production\PYZus{}count\PYZus{}desc}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count\PYZgt{}100}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:}                                         count   budget\_mean  revenue\_mean  \textbackslash{}
+         production                                                                  
+         Universal Pictures                        522  4.794349e+07  1.532101e+08   
+         Warner Bros.                              509  5.871969e+07  1.698861e+08   
+         Paramount Pictures                        431  5.056451e+07  1.635176e+08   
+         Twentieth Century Fox Film Corporation    282  5.549552e+07  2.081310e+08   
+         Columbia Pictures                         272  5.623128e+07  1.514852e+08   
+         New Line Cinema                           219  4.198514e+07  1.311266e+08   
+         Metro-Goldwyn-Mayer (MGM)                 218  4.188198e+07  1.364743e+08   
+         Walt Disney Pictures                      213  6.935539e+07  2.192937e+08   
+         Touchstone Pictures                       178  4.966909e+07  1.256124e+08   
+         Columbia Pictures Corporation             160  5.085223e+07  1.477740e+08   
+         TriStar Pictures                          147  4.207645e+07  1.128591e+08   
+         Miramax Films                             139  2.797531e+07  8.354751e+07   
+         Relativity Media                          108  5.078277e+07  1.288102e+08   
+         
+                                                 percent\_profit\_movies  
+         production                                                     
+         Universal Pictures                                   0.825670  
+         Warner Bros.                                         0.817289  
+         Paramount Pictures                                   0.837587  
+         Twentieth Century Fox Film Corporation               0.868794  
+         Columbia Pictures                                    0.860294  
+         New Line Cinema                                      0.812785  
+         Metro-Goldwyn-Mayer (MGM)                            0.784404  
+         Walt Disney Pictures                                 0.920188  
+         Touchstone Pictures                                  0.752809  
+         Columbia Pictures Corporation                        0.825000  
+         TriStar Pictures                                     0.734694  
+         Miramax Films                                        0.776978  
+         Relativity Media                                     0.824074  
+\end{Verbatim}
+            
+    \subsubsection{Answer 5: All production companies with 100+ movies have
+made more than 75\% of profitable movies. Walt Disney made 213 movies
+out of which 92\% movies made
+profit}\label{answer-5-all-production-companies-with-100-movies-have-made-more-than-75-of-profitable-movies.-walt-disney-made-213-movies-out-of-which-92-movies-made-profit}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{}plotting the budget average of a production}
+         \PY{n}{production\PYZus{}budget\PYZus{}desc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{budget\PYZus{}mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Adding labels}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average budget of different production companies}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Production Companies}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{production\PYZus{}companies ==}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{Boram Entertainment Inc.}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{}movie with highest budget}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:}          id    imdb\_id  popularity     budget   revenue     original\_title  \textbackslash{}
+         2244  46528  tt1032751     0.25054  425000000  11087569  The Warrior's Way   
+         
+                                                            cast  \textbackslash{}
+         2244  Kate Bosworth|Jang Dong-gun|Geoffrey Rush|Dann{\ldots}   
+         
+                                             homepage    director  \textbackslash{}
+         2244  http://www.iamrogue.com/thewarriorsway  Sngmoo Lee   
+         
+                               tagline     {\ldots}       \textbackslash{}
+         2244  Assassin. Hero. Legend.     {\ldots}        
+         
+                                                        overview runtime  \textbackslash{}
+         2244  An Asian assassin (Dong-gun Jang) is forced to{\ldots}     100   
+         
+                                                  genres      production\_companies  \textbackslash{}
+         2244  Adventure|Fantasy|Action|Western|Thriller  Boram Entertainment Inc.   
+         
+              release\_date vote\_count  vote\_average  release\_year   budget\_adj  \textbackslash{}
+         2244      12/2/10         74           6.4          2010  425000000.0   
+         
+               revenue\_adj  
+         2244   11087569.0  
+         
+         [1 rows x 21 columns]
+\end{Verbatim}
+            
+    \subsubsection{Answer 5-1: Boram Entertainment Inc. produced the movie
+with highest budget and no
+profits}\label{answer-5-1-boram-entertainment-inc.-produced-the-movie-with-highest-budget-and-no-profits}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{}number of movies made by each production}
+         \PY{n}{production\PYZus{}count\PYZus{}desc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} production
+         Universal Pictures                        522
+         Warner Bros.                              509
+         Paramount Pictures                        431
+         Twentieth Century Fox Film Corporation    282
+         Columbia Pictures                         272
+         Name: count, dtype: int64
+\end{Verbatim}
+            
+    \subsubsection{Answer 5-2: Universal Pictures, Warner Bros and Paramount
+Pictures have made more than 400 movies over the
+years}\label{answer-5-2-universal-pictures-warner-bros-and-paramount-pictures-have-made-more-than-400-movies-over-the-years}
+
+    \subsubsection{Research Question 6: Which production companies with
+significant number of movies recieve the highest avergae
+vote?}\label{research-question-6-which-production-companies-with-significant-number-of-movies-recieve-the-highest-avergae-vote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{}Grouping the movies by production to calculate the average rating recieved by each }
+         \PY{n}{vote\PYZus{}by\PYZus{}production} \PY{o}{=} \PY{n}{df\PYZus{}split\PYZus{}production}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{production}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vote\PYZus{}average}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Labelling the columns}
+         \PY{n}{vote\PYZus{}by\PYZus{}production}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vote\PYZus{}Average}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}Sorting the values according to the vote\PYZus{}average}
+         \PY{n}{vote\PYZus{}desc} \PY{o}{=} \PY{n}{vote\PYZus{}by\PYZus{}production}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vote\PYZus{}Average}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{n}{vote\PYZus{}desc}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count\PYZgt{}10 \PYZam{} Vote\PYZus{}Average \PYZgt{}7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:}                          Count  Vote\_Average
+         production                                  
+         Heyday Films                18      7.066667
+         Pixar Animation Studios     44      7.020455
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{df\PYZus{}split\PYZus{}production}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{production==}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{Heyday Films}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}Number of movies by \PYZdq{}Heyday Films\PYZdq{}  that made a profit}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} True     17
+         False     1
+         Name: profit, dtype: int64
+\end{Verbatim}
+            
+    \subsubsection{Answer 6: Heyday Films have made 18 movies in which 17
+were profitable with avergae vote as
+7.06}\label{answer-6-heyday-films-have-made-18-movies-in-which-17-were-profitable-with-avergae-vote-as-7.06}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{df\PYZus{}split\PYZus{}production}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{production==}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{Pixar Animation Studios}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:} True    44
+         Name: profit, dtype: int64
+\end{Verbatim}
+            
+    \subsubsection{Answer 6-1: Pixar Animation Studios have made 44 movies
+with no loss and a vote average of
+7.02}\label{answer-6-1-pixar-animation-studios-have-made-44-movies-with-no-loss-and-a-vote-average-of-7.02}
+
+    \subsubsection{Cast Specific Analysis}\label{cast-specific-analysis}
+
+    Creating multiple rows for cast column with multiple entries \#\#\#\#
+This DataFrame will be used for cast specific analysis
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{df\PYZus{}split\PYZus{}cast} \PY{o}{=} \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{c} \PY{o}{=} \PY{n}{df\PYZus{}split\PYZus{}cast}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cast}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{)}
+         \PY{n}{c}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{n}{c}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{droplevel}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{c}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cast\PYZus{}new}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{c}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cast\PYZus{}new}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{df\PYZus{}split\PYZus{}cast} \PY{o}{=}\PY{n}{df\PYZus{}split\PYZus{}cast}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+         \PY{k}{del} \PY{n}{df\PYZus{}split\PYZus{}cast}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cast}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \subsubsection{Research Question 7: Which cast has acted in most movies?
+Which cast movies are more likely to give
+profit?}\label{research-question-7-which-cast-has-acted-in-most-movies-which-cast-movies-are-more-likely-to-give-profit}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{c+c1}{\PYZsh{}Grouping the movies by cast}
+         \PY{n}{cast\PYZus{}movie\PYZus{}count} \PY{o}{=} \PY{n}{df\PYZus{}split\PYZus{}cast}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cast\PYZus{}new}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Naming columns}
+         \PY{n}{cast\PYZus{}movie\PYZus{}count}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Movie\PYZus{}Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{percentage\PYZus{}profit\PYZus{}movies}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}Sorting data with number of movies made by each actor}
+         \PY{n}{cast\PYZus{}movies\PYZus{}desc} \PY{o}{=} \PY{n}{cast\PYZus{}movie\PYZus{}count}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Movie\PYZus{}Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{n}{cast\PYZus{}movies\PYZus{}desc}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{percentage\PYZus{}profit\PYZus{}movies\PYZgt{}0.90 \PYZam{} Movie\PYZus{}Count \PYZgt{} 30}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:}                 Movie\_Count  percentage\_profit\_movies
+         cast\_new                                             
+         Tom Hanks                46                  0.978261
+         Jeff Bridges             39                  0.923077
+         Cameron Diaz             38                  0.947368
+         Jack Nicholson           37                  0.918919
+         Tom Cruise               37                  0.945946
+         Pierce Brosnan           34                  0.911765
+         Brian Cox                33                  0.909091
+         William Hurt             32                  0.906250
+\end{Verbatim}
+            
+    \paragraph{Answer 7: From this analysis we can say that Tom Hanks have
+made 46 movies and 97\% of which gave
+profit}\label{answer-7-from-this-analysis-we-can-say-that-tom-hanks-have-made-46-movies-and-97-of-which-gave-profit}
+
+\paragraph{Tom Cruise and Cameron Diaz have made 37 and 38 movies
+respctively and around 94\% of them gave a
+profit}\label{tom-cruise-and-cameron-diaz-have-made-37-and-38-movies-respctively-and-around-94-of-them-gave-a-profit}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{cast\PYZus{}movies\PYZus{}desc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:}                    Movie\_Count  percentage\_profit\_movies
+         cast\_new                                                
+         Robert De Niro              72                  0.708333
+         Samuel L. Jackson           70                  0.742857
+         Bruce Willis                62                  0.758065
+         Nicolas Cage                61                  0.704918
+         Michael Caine               52                  0.865385
+         Robin Williams              51                  0.823529
+         Morgan Freeman              49                  0.755102
+         John Goodman                48                  0.770833
+         John Cusack                 48                  0.729167
+         Susan Sarandon              47                  0.680851
+\end{Verbatim}
+            
+    \subsubsection{Answer 7-1: From the above analysis we can say that
+Robert De Niro,Samuel L. Jackson, Bruce Wills, Nicolas Cage, Michael
+Caine and Robin Williams have acted in more than 50
+movies}\label{answer-7-1-from-the-above-analysis-we-can-say-that-robert-de-nirosamuel-l.-jackson-bruce-wills-nicolas-cage-michael-caine-and-robin-williams-have-acted-in-more-than-50-movies}
+
+    \subsection{Other Analysis}\label{other-analysis}
+
+    \subsubsection{Research Question 8:What are the average movie
+budget,average movie runtime and average movie
+revenue?}\label{research-question-8what-are-the-average-movie-budgetaverage-movie-runtime-and-average-movie-revenue}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{budget\PYZus{}adj}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}Average budget used by movies}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:} 37350903.183765404
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{revenue\PYZus{}adj}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}Average revenue generated by movies}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} 116205432.8325628
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{runtime}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}Average runtime of movies}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} 102.92662709783053
+\end{Verbatim}
+            
+    \subsubsection{Other Analysis}\label{other-analysis}
+
+\begin{verbatim}
+<li> Average budget = \$37350903.18 </li>
+<li> Average revenue = \$116205432.832 </li>
+<li> Average runtime = 102 minutes </li>
+\end{verbatim}
+
+     \#\# Conclusions
+
+\begin{verbatim}
+<li>The most common movie genre is Drama followed by Comedy and Thriller.</li>
+<li>Adventure, Action, Animation, Fantasy and Science Fiction are some genres which genrate higher revenue on an average while Documentary and horror movies generate low revenue.</li>
+<li>75-80% of all movies give profit irrespective of the genre except TV Movie where all 1051 movies gave profit.</li>
+<li>More popular movies recieve higher number of votes.</li>
+<li>Popularity and the number of movies made every year have continuously increased over the years.</li>
+<li>Walt Disney made 213 movies out of which 92% movies made profit.</li>
+<li>'The Warrior's way' was the highest budget movie with no profit.</li>
+<li>Universal Pictures, Warner Bros and Paramount Pictures have made more than 400 movies over the years.</li>
+<li>Pixar Animation Studios have made 44 movies with no loss and a vote average of 7.02</li>
+<li>Tom Hanks have made 46 movies and 97% of which gave profit.</li>
+<li>Robert De Niro,Samuel L. Jackson, Bruce Wills, Nicolas Cage, Michael Caine and Robin Williams are spome actors who have been casted in more than 50 movies</li>
+\end{verbatim}
+
+     \#\# Limitations
+
+\begin{verbatim}
+<li>1094 out 0f 10866 rows are dropped for the analysis.</li>
+<li>Some columns are dropped which might be useful for the analysis </li>
+<li>Profit margin is calculated specifically.</li>
+<li>Revenue and budget are assumed to be in dollars. </li>
+<li>The rows in budget and revenue column are imputed by mean of the columns respectively</li>
+\end{verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
