@@ -14,9 +14,9 @@ The second project: Investigate a Dataset (TMDb Movie Data Analysis Using Python
 including user ratings and revenue.
 - the Python libraries NumPy, Pandas, and Matplotlib to make your analysis easier.
 
-After completing the project, you will:
+After completing the project:
 
-- Know all the steps involved in a typical data analysis process.
+- I Know all the steps involved in a typical data analysis process.
 - Be comfortable posing questions that can be answered with a given dataset and then answering those questions.
 - Know how to investigate problems in a dataset and wrangle the data into a format you can use.
 - Have experience communicating the results of your analysis.
