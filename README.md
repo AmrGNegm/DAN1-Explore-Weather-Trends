@@ -1,6 +1,6 @@
 # Data-Analyst-Nanodegree-Udacity
 
-or 6-months, These are the projects that I did:
+for 6-months, These are the projects that I did:
 _____________________________________
 
 The first project: Explore Weather Trends (Using Excel )
