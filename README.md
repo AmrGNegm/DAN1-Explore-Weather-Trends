@@ -26,7 +26,7 @@ After completing the project:
 _____________________________________
 The Third project: Analyze A/B Test Results:
 
-AB test and regression are conducted to test the performance of an old website page compared to a newly developed website page using bootstrapping for hypothesis testing.
+- AB test and regression are conducted to test the performance of an old website page compared to a newly developed website page using bootstrapping for hypothesis testing.
 A/B testing is the process of comparing two variations of a page element, usually by testing users' response to variant A vs variant B, and concluding which of the two variants is more effective.
 
 _____________________________________
