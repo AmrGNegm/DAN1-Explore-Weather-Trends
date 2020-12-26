@@ -25,12 +25,14 @@ After completing the project:
 - Know how to use Matplotlib to produce plots showing your findings.
 _____________________________________
 The Third project: Analyze A/B Test Results:
+
 AB test and regression are conducted to test the performance of an old website page compared to a newly developed website page using bootstrapping for hypothesis testing.
 A/B testing is the process of comparing two variations of a page element, usually by testing users' response to variant A vs variant B, and concluding which of the two variants is more effective.
 
 _____________________________________
 The fourth project: (Wrangle and Analyze Data)
-using the Python library (Tweepy) for accessing the Twitter API.
+
+- Using the Python library (Tweepy) for accessing the Twitter API.
 Our tasks in this project are as follows:
 1- Data wrangling, which consists of: (Gathering data, Assessing data, Cleaning data, Storing, analyzing, and visualizing your wrangled data).
 2- Reporting on your data wrangling efforts and your data analyses and visualizations.
